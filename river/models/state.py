@@ -9,7 +9,7 @@ try:
 except ImportError:
     from six import python_2_unicode_compatible
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from river.models.base_model import BaseModel
 from river.models.managers.state import StateManager
@@ -18,7 +18,7 @@ from river.models.managers.state import StateManager
 @python_2_unicode_compatible
 class State(BaseModel):
     class Meta:
-        app_label = 'river'
+        app_label = "river"
         verbose_name = _("State")
         verbose_name_plural = _("States")
 
@@ -26,22 +26,19 @@ class State(BaseModel):
 
     slug = models.SlugField(unique=True, null=True, blank=True)
     label = models.CharField(max_length=50)
-    description = models.CharField(_("Description"), max_length=200, null=True, blank=True)
+    description = models.CharField(
+        _("Description"), max_length=200, null=True, blank=True
+    )
 
     def __str__(self):
         return self.label
 
     def natural_key(self):
-        return self.slug,
+        return (self.slug,)
 
     def details(self):
         detail = super(State, self).details()
-        detail.update(
-            {
-                'label': self.label,
-                'description': self.description
-            }
-        )
+        detail.update({"label": self.label, "description": self.description})
         return detail
 
 
