@@ -1,4 +1,4 @@
-django-mptt==0.15
+django-mptt @ git+https://github.com/django-mptt/django-mptt.git@23cd8370fc99878307a183556378d2b1a65fa37b
 factory-boy==2.11.1
 mock==2.0.0
 pyhamcrest==1.9.0
